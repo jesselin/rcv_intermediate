@@ -1,0 +1,32 @@
+<%= render 'layouts/header' %>
+
+<h1>Display all Products</h1>
+
+<h2><%=flash[:notice] %></h2>
+
+<table class="products">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Pricing</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @products.each do |prod| %>
+		<tr>
+			<td><%= prod['id'] %></td>		
+		    <td><%= prod['name'] %></td>
+		    <td><%= prod['description'] %></td>
+		    <td><%= prod['pricing'] %></td>
+		    <td><a href="/products/<%= prod['id'] %>/edit"><button type="button">Edit</button></a></td>
+		    <td>
+		    	<form action="/products/<%= prod['id'] %>" method="post">  
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type='hidden' name="_method" value="delete">
+					<input type="submit" value="Delete" />
+				</form>
+		    </td>
+		</tr>
+	<% end %>     
+</table>

@@ -1,0 +1,20 @@
+<%= render 'layouts/header' %>
+
+<h1>Product detail</h1>
+
+<h2><%=flash[:notice] %></h2>
+
+<table class="users">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Pricing</th>
+	</tr>
+		<tr>
+			<td><%= @product['id'] %></td>		
+		    <td><%= @product['name'] %></td>
+		    <td><%= @product['description'] %></td>
+		    <td><%= @product['pricing'] %></td>
+		</tr>
+</table>

@@ -1,0 +1,36 @@
+<%= render 'layouts/header' %>
+
+<h1>Add a new product</h1>
+
+<!-- ERROR VALIDATION -->
+<% if @product.errors.any? %>
+    <div id="error_explanation">
+    	<h2><%= pluralize(@product.errors.count, "error") %> prohibited this post from being saved:</h2>
+    	<ul>
+    		<% @product.errors.full_messages.each do |msg| %>
+     			<li><%= msg %></li>
+    		<% end %>
+      	</ul>
+    </div>
+<% end %>
+
+<!-- SIMPLE FORM -->
+<h3>Simple Form</h3>
+<%= simple_form_for @product do |f| %>
+	<%= f.input :name %>
+	<%= f.input :description %>
+	<%= f.input :pricing %>
+	<%= f.button :submit %>
+<% end %>
+
+<br><br><br>
+
+<!-- REGULAR HTML FORM -->
+<h3>Regular Form</h3>
+<form action="/products" method="post">  
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type="text" name="product[name]" placeholder="name" /><br>
+	<input type="text" name="product[description]" placeholder="description" /><br>
+	<input type="text" name="product[pricing]" placeholder="pricing" /><br>
+	<input type="submit" value="Create Product" />
+</form>
