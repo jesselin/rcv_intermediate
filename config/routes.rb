@@ -1,6 +1,7 @@
 RcvIntermediate::Application.routes.draw do
 
   resources :products
+  resources :comments
 
   root :to => 'products#index'
 

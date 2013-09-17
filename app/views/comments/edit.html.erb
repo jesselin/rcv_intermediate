@@ -1,0 +1,25 @@
+<h1>Update comment #<%= @comment['id'] %></h1>
+
+<h2><%= @comment.errors.full_messages.first if @comment.errors.any? %></h2>
+
+
+<!-- SIMPLE FORM -->
+<h3>Simple Form</h3>
+<%= simple_form_for @comment do |f| %>
+	<%= f.input :author %>
+	<%= f.input :content %>
+	<%= f.input :product_id %>
+	<%= f.button :submit %>
+<% end %>
+
+<br><br><br>
+
+<!-- REGULAR HTML FORM -->
+<h3>Regular Form</h3>
+<form action="/comments" method="post">  
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type="text" name="comment[author]" placeholder="author" value=<%= @comment['author'] %>><br>
+	<input type="text" name="comment[content]" placeholder="content" value=<%= @comment['content'] %>><br>
+	<input type="text" name="comment[product_id]" placeholder="category id" value=<%= @comment['product_id'] %>><br>
+	<input type="submit" value="Update Comment" />
+</form>

@@ -1,0 +1,34 @@
+<h1>Add a new comment</h1>
+
+<!-- ERROR VALIDATION -->
+<% if @comment.errors.any? %>
+    <div id="error_explanation">
+    	<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+    	<ul>
+    		<% @comment.errors.full_messages.each do |msg| %>
+     			<li><%= msg %></li>
+    		<% end %>
+      	</ul>
+    </div>
+<% end %>
+
+<!-- SIMPLE FORM -->
+<h3>Simple Form</h3>
+<%= simple_form_for @comment do |f| %>
+	<%= f.input :author %>
+	<%= f.input :content %>
+	<%= f.input :product_id %>
+	<%= f.button :submit %>
+<% end %>
+
+<br><br>
+
+<!-- REGULAR HTML FORM -->
+<h3>Regular Form</h3>
+<form action="/comments" method="post">  
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type="text" name="comment[author]" placeholder="author" /><br>
+	<input type="text" name="comment[content]" placeholder="content" /><br>
+	<input type="text" name="comment[product_id]" placeholder="category id" /><br>
+	<input type="submit" value="Create Comment" />
+</form>

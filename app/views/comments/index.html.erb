@@ -1,0 +1,30 @@
+<h1>Display all Comments</h1>
+
+<h2><%=flash[:notice] %></h2>
+
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Product</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @comments.each do |comment| %>
+		<tr>
+			<td><%= comment['id'] %></td>		
+		    <td><%= comment['author'] %></td>
+		    <td><%= comment['content'] %></td>
+		    <td><%= comment.product.name %></td>
+		    <td><a href="/comments/<%= comment['id'] %>/edit"><button type="button">Edit</button></a></td>
+		    <td>
+		    	<form action="/comments/<%= comment['id'] %>" method="post">  
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type='hidden' name="_method" value="delete">
+					<input type="submit" value="Delete" />
+				</form>
+		    </td>
+		</tr>
+	<% end %>     
+</table>
