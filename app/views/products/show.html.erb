@@ -4,17 +4,29 @@
 
 <h2><%=flash[:notice] %></h2>
 
-<table class="users">
+<table class="table">
 	<tr>
 		<th>ID</th>
 		<th>Name</th>
 		<th>Description</th>
 		<th>Pricing</th>
+		<th>Category</th>
+		<th>Edit</th>
+		<th>Delete</th>
 	</tr>
 		<tr>
 			<td><%= @product['id'] %></td>		
 		    <td><%= @product['name'] %></td>
 		    <td><%= @product['description'] %></td>
 		    <td><%= @product['pricing'] %></td>
+		    <td><%= @product.category.name %></td>
+		    <td><a href="/products/<%= @product['id'] %>/edit"><button type="button">Edit</button></a></td>
+		    <td>
+		    	<form action="/products/<%= @product['id'] %>" method="post">  
+					<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+					<input type='hidden' name="_method" value="delete">
+					<input type="submit" value="Delete" />
+				</form>
+		    </td>
 		</tr>
 </table>
